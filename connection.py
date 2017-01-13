@@ -10,13 +10,17 @@ from sqlalchemy.orm import sessionmaker
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-server = 'ec2-52-41-252-180.us-west-2.compute.amazonaws.com'
+server = '# add your server address'
 
 
 def r(server):
     return redis.Redis(host=server, port=6379)
+my_id = '# add your id'
+my_pw = '# add your password'
+my_port = '# add your port for mysql'
+my_schema = "# add your schema's name"
 
-connection_string = 'mysql+mysqldb://root:windows48@{}:3306/crawl' \
-                    .format(server)
+connection_string = 'mysql+mysqldb://{}:{}@{}:{}/{}' \
+                    .format(my_id, my_pw, server, my_port, my_schema)
 engine = create_engine(connection_string, pool_recycle=3600, encoding='utf-8')
 Session = sessionmaker(bind=engine)
